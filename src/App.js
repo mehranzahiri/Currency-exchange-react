@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import "react-alice-carousel/lib/alice-carousel.css";
+import {jssPreset, StylesProvider} from '@mui/styles';
+import {ThemeProvider} from "@material-ui/core/styles"
+import CustomTheme from "./assets/CustomTheme";
+import './assets/fonts/css/fontiran.css'
+
+import {create} from "jss";
+
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {ConverterComponent} from "./components/ConverterComponent";
+
+const jss = create({
+    plugins: [...jssPreset().plugins],
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [value, setValue] = React.useState("/");
+    // const navigate = useNavigate()
+
+    return (
+        <ThemeProvider theme={CustomTheme}>
+            <StylesProvider jss={jss}>
+                <BrowserRouter>
+                    <Routes>
+
+                        <Route path="/" element={
+                            <ConverterComponent/>
+                        }/>
+
+                    </Routes>
+
+                </BrowserRouter>
+
+            </StylesProvider>
+        </ThemeProvider>
+    );
+
 }
 
+
 export default App;
+
+
+
+
+
+
+
